@@ -17,5 +17,7 @@ template-projects中的内置简单sql生成工具
 - 配合 `template-modules-dao` 使用更佳
 
 ## 文档
-- [入门指南](https://github.com/miyakowork/template-modules-dao/wiki/入门)
-- [主要方法](https://github.com/miyakowork/template-modules-dao/wiki/主要方法API)
+> 主要包括2个类方法 SQLBeanBuilder 和 SQLStrBuilder
+- [入口方法](https://github.com/miyakowork/template-utils-sql/wiki/入口方法)
+- [SQLBeanBuilder方法指南](https://github.com/miyakowork/template-utils-sql/wiki/SQLBeanBuilder方法指南)
+- [SQLStrBuilder方法指南](https://github.com/miyakowork/template-utils-sql/wiki/SQLStrBuilder使用文档)
