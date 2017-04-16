@@ -4,7 +4,9 @@ package me.wuwenbin.sql.util;
 import me.wuwenbin.sql.annotation.SQLTable;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Vector;
 
 
 /**
@@ -67,5 +69,13 @@ public class SQLBuilderUtils {
                 return true;
         }
         return false;
+    }
+
+    public static <T> T[] mergeArray(T[]... arrays) {
+        List<T> newT = new Vector<>();
+        for (T[] array : arrays) {
+            newT.add((T) Arrays.asList(array));
+        }
+        return (T[]) newT.toArray();
     }
 }
