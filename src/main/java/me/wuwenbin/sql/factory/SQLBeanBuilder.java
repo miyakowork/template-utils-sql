@@ -78,7 +78,7 @@ public final class SQLBeanBuilder {
 
             if (routers != null && routers.length > 0) {
                 sb.append(WHERE).append("1=1");
-                Field[] fields = beanClass.getFields();
+                Field[] fields = SQLBuilderUtils.getAllFieldsExceptObject(beanClass);
                 assembleCountSQL(sb, fields, AND, tableName, routers);
             }
             return SQLBuilderUtils.dealSQL(sb.toString());
@@ -102,7 +102,7 @@ public final class SQLBeanBuilder {
 
             if (routers != null && routers.length > 0) {
                 sb.append(WHERE).append("1<>1");
-                Field[] fields = beanClass.getFields();
+                Field[] fields = SQLBuilderUtils.getAllFieldsExceptObject(beanClass);
                 assembleCountSQL(sb, fields, OR, tableName, routers);
             }
             return SQLBuilderUtils.dealSQL(sb.toString());
@@ -123,7 +123,7 @@ public final class SQLBeanBuilder {
         else {
             String tableName = beanClass.getAnnotation(sqlTableClass).value();
             StringBuilder sb = new StringBuilder(selectPre);
-            Field[] fields = beanClass.getFields();
+            Field[] fields = SQLBuilderUtils.getAllFieldsExceptObject(beanClass);
             assembleSelectSQL(selectColumnsRouters, tableName, sb, fields);
 
             sb.append(FROM).append(tableName);
@@ -181,7 +181,7 @@ public final class SQLBeanBuilder {
         else {
             StringBuilder sb = new StringBuilder(selectPre);
             String tableName = beanClass.getAnnotation(sqlTableClass).value();
-            Field[] fields = beanClass.getFields();
+            Field[] fields = SQLBuilderUtils.getAllFieldsExceptObject(beanClass);
             assembleSelectSQL(routers, tableName, sb, fields);
             sb.append(FROM).append(tableName);
 
@@ -214,7 +214,7 @@ public final class SQLBeanBuilder {
         else {
             StringBuilder sb = new StringBuilder(insertPre);
             String tableName = beanClass.getAnnotation(sqlTableClass).value();
-            Field[] fields = beanClass.getFields();
+            Field[] fields = SQLBuilderUtils.getAllFieldsExceptObject(beanClass);
             sb.append(tableName);
 
             StringBuilder values = new StringBuilder("(");
@@ -246,7 +246,7 @@ public final class SQLBeanBuilder {
                         if (!field.getAnnotation(sqlColumnClass).pk()) {
                             values.append(":").append(field.getName()).append(", ");
                         }
-                    } else values.append(":").append(field.getName()).append(", ");
+                    } /*else values.append(":").append(field.getName()).append(", ");*/
                 }
                 sb.append(" VALUES").append(values).append(")");
             }
@@ -322,7 +322,7 @@ public final class SQLBeanBuilder {
         else {
             String tableName = beanClass.getAnnotation(sqlTableClass).value();
             StringBuilder sb = new StringBuilder(updatePre).append(tableName);
-            Field[] fields = beanClass.getFields();
+            Field[] fields = SQLBuilderUtils.getAllFieldsExceptObject(beanClass);
             if (updateRouters != null && updateRouters.length > 0) {
                 sb.append(" SET ");
                 for (Field field : fields) {
@@ -372,7 +372,7 @@ public final class SQLBeanBuilder {
         else {
             String tableName = beanClass.getAnnotation(sqlTableClass).value();
             StringBuilder sb = new StringBuilder(updatePre).append(tableName);
-            Field[] fields = beanClass.getFields();
+            Field[] fields = SQLBuilderUtils.getAllFieldsExceptObject(beanClass);
             String pkColumn = null, pkField = null;
             if (updateRouters != null && updateRouters.length > 0) {
                 sb.append(" SET ");
@@ -409,7 +409,7 @@ public final class SQLBeanBuilder {
         else {
             String tableName = beanClass.getAnnotation(sqlTableClass).value();
             StringBuilder sb = new StringBuilder(deletePre).append(tableName);
-            Field[] fields = beanClass.getFields();
+            Field[] fields = SQLBuilderUtils.getAllFieldsExceptObject(beanClass);
             boolean hasPk = false;
             sb.append(WHERE);
             for (Field field : fields) {
@@ -440,7 +440,7 @@ public final class SQLBeanBuilder {
         else {
             String tableName = beanClass.getAnnotation(sqlTableClass).value();
             StringBuilder sb = new StringBuilder(deletePre).append(tableName);
-            Field[] fields = beanClass.getFields();
+            Field[] fields = SQLBuilderUtils.getAllFieldsExceptObject(beanClass);
             if (routers != null && routers.length > 0) {
                 sb.append(WHERE);
                 assembleWhereSQL(sb, fields, routers);

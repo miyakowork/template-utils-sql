@@ -3,6 +3,7 @@ package me.wuwenbin.sql.util;
 
 import me.wuwenbin.sql.annotation.SQLTable;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -71,11 +72,24 @@ public class SQLBuilderUtils {
         return false;
     }
 
-    public static <T> T[] mergeArray(T[]... arrays) {
-        List<T> newT = new Vector<>();
-        for (T[] array : arrays) {
-            newT.add((T) Arrays.asList(array));
+    /**
+     * 获取类中所有字段包括父类的protected字段
+     *
+     * @param clazz
+     * @return
+     */
+    public static Field[] getAllFieldsExceptObject(Class<?> clazz) {
+        List<Field> fields = new Vector<>();
+        Class tempClass = clazz;
+        while (tempClass != Object.class) {
+            fields.addAll(Arrays.asList(tempClass.getDeclaredFields()));
+            tempClass = tempClass.getSuperclass();
         }
-        return (T[]) newT.toArray();
+        Field[] newField = new Field[fields.size()];
+        for (int i = 0; i < fields.size(); i++) {
+            Field field = fields.get(i);
+            newField[i] = field;
+        }
+        return newField;
     }
 }

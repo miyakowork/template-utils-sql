@@ -2,6 +2,13 @@
 template-projects中的内置简单sql生成工具
 
 ## 更新日志 ## 
+#### 1.1.5
++ bug fixed
+####1.1.2
++ bug fixed
+#### 1.1.1
++ bug fixed
+
 #### 1.1.0
 + 增强/修正：可以获取到父类的变量以及所有public、private变量
 
