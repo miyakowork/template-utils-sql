@@ -4,7 +4,7 @@
 
   <groupId>me.wuwenbin</groupId>
   <artifactId>template-utils-sql</artifactId>
-  <version>1.1.5</version>
+  <version>1.2.1</version>
   <build>
     <plugins>
       <plugin>

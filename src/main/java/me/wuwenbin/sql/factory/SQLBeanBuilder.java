@@ -46,6 +46,50 @@ public final class SQLBeanBuilder {
     }
 
     /**
+     * 获取当前SQLTable中的表名
+     *
+     * @return
+     * @throws SQLTableNotFoundException
+     */
+    public String getTableName() throws SQLTableNotFoundException {
+        if (!SQLBuilderUtils.SQLTableIsExist(beanClass))
+            throw new SQLTableNotFoundException(beanClass);
+        else
+            return beanClass.getAnnotation(sqlTableClass).value();
+    }
+
+    /**
+     * 获取主键变量
+     *
+     * @return
+     * @throws PkFieldNotFoundException
+     */
+    public Field getPkField() throws PkFieldNotFoundException {
+        Field[] fields = SQLBuilderUtils.getAllFieldsExceptObject(beanClass);
+        Field pkField = null;
+        int sum = 0;
+        for (Field field : fields) {
+            if (field.isAnnotationPresent(sqlColumnClass)) {
+                if (field.getAnnotation(sqlColumnClass).pk()) {
+                    sum++;
+                    pkField = field;
+                }
+            }
+        }
+        if (sum > 0 && pkField != null) return pkField;
+        else throw new PkFieldNotFoundException();
+    }
+
+    /**
+     * 获取所有的成员变量，包括所有父类，除了Object
+     *
+     * @return
+     */
+    public Field[] getAllFieldExceptObject() {
+        return SQLBuilderUtils.getAllFieldsExceptObject(beanClass);
+    }
+
+    /**
      * 无条件统计
      *
      * @return {@link String}

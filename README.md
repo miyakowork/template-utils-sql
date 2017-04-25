@@ -2,10 +2,18 @@
 template-projects中的内置简单sql生成工具
 
 ## 更新日志 ## 
+#### 1.2.1
++ bug fixed 获取主键变量
+
+#### 1.2.0
++ 增加SQLBeanBuilder中可以获取表名、主键变量以及所有字段的方法
+
 #### 1.1.5
 + bug fixed
+
 ####1.1.2
 + bug fixed
+
 #### 1.1.1
 + bug fixed
 
