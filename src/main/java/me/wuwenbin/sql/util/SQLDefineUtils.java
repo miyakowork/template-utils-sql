@@ -56,12 +56,12 @@ public class SQLDefineUtils {
     /**
      * 如果用户指定了column的列名就按用户指定的来，没有则驼峰命名转化为下划线命名
      *
-     * @param column the column of db
+     * @param column    the column of db
      * @param fieldName the custom name of column
      * @return {@link String}
      */
     public static String java2SQL(String column, String fieldName) {
-        if (column == null || column == "") {
+        if (column == null || "".equals(column)) {
             String newName = camelToUnderline(fieldName);
             if (newName.substring(0, 1).equals("_"))
                 return newName.substring(1, newName.length());

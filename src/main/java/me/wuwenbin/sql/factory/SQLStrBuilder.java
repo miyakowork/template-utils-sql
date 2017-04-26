@@ -45,7 +45,7 @@ public class SQLStrBuilder {
      * @throws TableNameNullException
      */
     public String countAndByColumns(String tableName, String... columns) throws TableNameNullException {
-        if (tableName == null || tableName == "")
+        if (tableName == null || "".equals(tableName))
             throw new TableNameNullException();
         else {
             StringBuilder sb = new StringBuilder(selectPre);
@@ -68,7 +68,7 @@ public class SQLStrBuilder {
      * @throws TableNameNullException
      */
     public String countOrByColumns(String tableName, String... columns) throws TableNameNullException {
-        if (tableName == null || tableName == "")
+        if (tableName == null || "".equals(tableName))
             throw new TableNameNullException();
         else {
             StringBuilder sb = new StringBuilder(selectPre);
@@ -92,7 +92,7 @@ public class SQLStrBuilder {
      * @throws TableNameNullException
      */
     public String selectPartByColumnsAnd(String tableName, String[] selectColumns, String... conditionColumns) throws TableNameNullException {
-        if (tableName == null || tableName == "")
+        if (tableName == null || "".equals(tableName))
             throw new TableNameNullException();
         else {
             StringBuilder sb = new StringBuilder(selectPre);
@@ -140,7 +140,7 @@ public class SQLStrBuilder {
      * @throws TableNameNullException
      */
     public String insertAll(String tableName, int columnCount) throws TableNameNullException {
-        if (tableName == null || tableName == "")
+        if (tableName == null || "".equals(tableName))
             throw new TableNameNullException();
         else {
             StringBuilder sb = new StringBuilder(insertPre);
@@ -164,7 +164,7 @@ public class SQLStrBuilder {
      * @throws InsertColumnNullException
      */
     public String insertColumns(String tableName, String... columns) throws TableNameNullException, InsertColumnNullException {
-        if (tableName == null || tableName == "")
+        if (tableName == null || "".equals(tableName))
             throw new TableNameNullException();
         else {
             StringBuilder sb = new StringBuilder(insertPre);
@@ -194,7 +194,7 @@ public class SQLStrBuilder {
      * @throws UpdateColumnNullException
      */
     public String updateColumnsByColumnArray(String tableName, String[] updateColumns, String[] conditionColumns) throws TableNameNullException, UpdateColumnNullException {
-        if (tableName == null || tableName == "")
+        if (tableName == null || "".equals(tableName))
             throw new TableNameNullException();
         else {
             StringBuilder sb = new StringBuilder(updatePre);
@@ -225,7 +225,7 @@ public class SQLStrBuilder {
      * @throws DeleteSQLConditionsNullException
      */
     public String deleteByColumns(String tableName, String... columns) throws TableNameNullException, DeleteSQLConditionsNullException {
-        if (tableName == null || tableName == "")
+        if (tableName == null || "".equals(tableName))
             throw new TableNameNullException();
         else {
             StringBuilder sb = new StringBuilder(deletePre);
