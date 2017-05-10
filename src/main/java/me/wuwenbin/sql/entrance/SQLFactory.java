@@ -5,7 +5,7 @@ import me.wuwenbin.sql.factory.SQLBeanBuilder;
 import me.wuwenbin.sql.factory.SQLStrBuilder;
 
 /**
- * entrance for sql util
+ * 使用入口方法
  * Created by wuwenbin on 2017/1/12.
  *
  * @author wuwenbin
