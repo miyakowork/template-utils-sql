@@ -18,7 +18,7 @@ template-projects中的内置简单sql生成工具
 #### 1.1.5
 + bug fixed
 
-####1.1.2
+#### 1.1.2
 + bug fixed
 
 #### 1.1.1
