@@ -2,6 +2,10 @@
 template-projects中的内置简单sql生成工具
 
 ## 更新日志 ## 
+#### 1.3.0.RELEASE
++ 一些小改进
++ 1.3发行版本上线
+
 #### 1.2.2
 + 优化判断功能
 
@@ -27,7 +31,7 @@ template-projects中的内置简单sql生成工具
 - 初始版本发布
 
 ## 开始使用 ##
-> maven 坐标  最新版本号请至中央仓库查询 当前 ```1.0.0```（2017年3月29日）
+> maven 坐标  最新版本号请至中央仓库查询
 ```xml
 <dependency>
   <groupId>me.wuwenbin</groupId>

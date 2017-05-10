@@ -25,7 +25,7 @@ public final class SQLFactory {
      * @param #clazz 对应实体类
      * @return {@link SQLBeanBuilder}
      */
-    public static SQLBeanBuilder builder(Class<?> clazz) {
+    public synchronized static SQLBeanBuilder builder(Class<?> clazz) {
         if (sqlBeanBuilder == null) {
             synchronized (SQLBeanBuilder.class) {
                 if (sqlBeanBuilder == null) {
