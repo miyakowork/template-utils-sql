@@ -5,7 +5,7 @@ package me.wuwenbin.sql.exception;
  * <p>
  * Created by wuwenbin on 2017/1/10.
  */
-public class TableNameNullException extends Exception {
+public class TableNameNullException extends RuntimeException {
 
     public TableNameNullException() {
         super("tableName 为空!");

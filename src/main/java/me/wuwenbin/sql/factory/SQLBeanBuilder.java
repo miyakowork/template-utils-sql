@@ -27,9 +27,7 @@ public final class SQLBeanBuilder {
     private final String FROM = SPACE + "FROM" + SPACE;
     private final String WHERE = SPACE + "WHERE" + SPACE;
     private final String AND = SPACE + "AND" + SPACE;
-    private final String OR = SPACE + "OR" + SPACE;
     private final String selectPre = "SELECT" + SPACE;
-    private final String insertPre = "INSERT INTO" + SPACE;
     private final String updatePre = "UPDATE" + SPACE;
     private final String deletePre = "DELETE FROM" + SPACE;
 
@@ -37,6 +35,7 @@ public final class SQLBeanBuilder {
         return beanClass;
     }
 
+    @SuppressWarnings("unused")
     public void setBeanClass(Class<?> beanClass) {
         this.beanClass = beanClass;
     }
@@ -48,10 +47,10 @@ public final class SQLBeanBuilder {
     /**
      * 获取当前SQLTable中的表名
      *
-     * @return
+     * @return 表名
      * @throws SQLTableNotFoundException
      */
-    public String getTableName() throws SQLTableNotFoundException {
+    public String getTableName() {
         if (!SQLBuilderUtils.SQLTableIsExist(beanClass))
             throw new SQLTableNotFoundException(beanClass);
         else
@@ -64,7 +63,7 @@ public final class SQLBeanBuilder {
      * @return
      * @throws PkFieldNotFoundException
      */
-    public Field getPkField() throws PkFieldNotFoundException {
+    public Field getPkField() {
         Field[] fields = SQLBuilderUtils.getAllFieldsExceptObject(beanClass);
         Field pkField = null;
         int sum = 0;
@@ -94,7 +93,7 @@ public final class SQLBeanBuilder {
      *
      * @return {@link String}
      */
-    public String countAll() throws SQLTableNotFoundException {
+    public String countAll() {
         if (!SQLBuilderUtils.SQLTableIsExist(beanClass))
             throw new SQLTableNotFoundException(beanClass);
         else {
@@ -112,7 +111,7 @@ public final class SQLBeanBuilder {
      * @return {@link String}
      * @throws SQLTableNotFoundException
      */
-    public String countAndByRouters(int... routers) throws SQLTableNotFoundException {
+    public String countAndByRouters(int... routers) {
         if (!SQLBuilderUtils.SQLTableIsExist(beanClass))
             throw new SQLTableNotFoundException(beanClass);
         else {
@@ -136,7 +135,7 @@ public final class SQLBeanBuilder {
      * @return {@link String}
      * @throws SQLTableNotFoundException
      */
-    public String countOrByRouters(int... routers) throws SQLTableNotFoundException {
+    public String countOrByRouters(int... routers) {
         if (!SQLBuilderUtils.SQLTableIsExist(beanClass))
             throw new SQLTableNotFoundException(beanClass);
         else {
@@ -147,7 +146,7 @@ public final class SQLBeanBuilder {
             if (routers != null && routers.length > 0) {
                 sb.append(WHERE).append("1<>1");
                 Field[] fields = SQLBuilderUtils.getAllFieldsExceptObject(beanClass);
-                assembleCountSQL(sb, fields, OR, tableName, routers);
+                assembleCountSQL(sb, fields, " OR ", tableName, routers);
             }
             return SQLBuilderUtils.dealSQL(sb.toString());
         }
@@ -161,7 +160,7 @@ public final class SQLBeanBuilder {
      * @return {@link String}
      * @throws SQLTableNotFoundException
      */
-    public String selectPartByRoutersAnd(int[] selectColumnsRouters, int... conditionRouters) throws SQLTableNotFoundException {
+    public String selectPartByRoutersAnd(int[] selectColumnsRouters, int... conditionRouters) {
         if (!SQLBuilderUtils.SQLTableIsExist(beanClass))
             throw new SQLTableNotFoundException(beanClass);
         else {
@@ -186,7 +185,7 @@ public final class SQLBeanBuilder {
      * @return {@link String}
      * @throws SQLTableNotFoundException
      */
-    public String selectAllByRoutersAnd(int... routers) throws SQLTableNotFoundException {
+    public String selectAllByRoutersAnd(int... routers) {
         return selectPartByRoutersAnd(null, routers);
     }
 
@@ -196,7 +195,7 @@ public final class SQLBeanBuilder {
      * @return {@link String}
      * @throws SQLTableNotFoundException
      */
-    public String selectAll() throws SQLTableNotFoundException {
+    public String selectAll() {
         return selectAllByRoutersAnd();
     }
 
@@ -207,7 +206,7 @@ public final class SQLBeanBuilder {
      * @throws SQLTableNotFoundException
      * @throws NotSetPrimaryKeyException
      */
-    public String selectAllByPk() throws SQLTableNotFoundException, NotSetPrimaryKeyException {
+    public String selectAllByPk() {
         return selectPartByPk();
     }
 
@@ -219,7 +218,7 @@ public final class SQLBeanBuilder {
      * @throws SQLTableNotFoundException
      * @throws NotSetPrimaryKeyException
      */
-    public String selectPartByPk(int... routers) throws SQLTableNotFoundException, NotSetPrimaryKeyException {
+    public String selectPartByPk(int... routers) {
         if (!SQLBuilderUtils.SQLTableIsExist(beanClass))
             throw new SQLTableNotFoundException(beanClass);
         else {
@@ -252,11 +251,11 @@ public final class SQLBeanBuilder {
      * @return {@link String}
      * @throws SQLTableNotFoundException
      */
-    public String insertRoutersPk(boolean insertPk, int... routers) throws SQLTableNotFoundException {
+    public String insertRoutersPk(boolean insertPk, int... routers) {
         if (!SQLBuilderUtils.SQLTableIsExist(beanClass))
             throw new SQLTableNotFoundException(beanClass);
         else {
-            StringBuilder sb = new StringBuilder(insertPre);
+            StringBuilder sb = new StringBuilder("INSERT INTO ");
             String tableName = beanClass.getAnnotation(sqlTableClass).value();
             Field[] fields = SQLBuilderUtils.getAllFieldsExceptObject(beanClass);
             sb.append(tableName);
@@ -304,8 +303,20 @@ public final class SQLBeanBuilder {
      * @param insertPk 是否连同主键一起插入
      * @return {@link String}
      * @throws SQLTableNotFoundException
+     * @see {{@link #insertAll(boolean)}}
      */
-    public String insertAllPk(boolean insertPk) throws SQLTableNotFoundException {
+    @Deprecated
+    public String insertAllPk(boolean insertPk) {
+        return insertRoutersPk(insertPk);
+    }
+
+    /**
+     * true插入所有字段,包括id，false则不插入id主键
+     *
+     * @param insertPk
+     * @return
+     */
+    public String insertAll(boolean insertPk) {
         return insertRoutersPk(insertPk);
     }
 
@@ -315,7 +326,7 @@ public final class SQLBeanBuilder {
      * @return {@link String}
      * @throws SQLTableNotFoundException
      */
-    public String insertAllWithPk() throws SQLTableNotFoundException {
+    public String insertAllWithPk() {
         return insertRoutersPk(true);
     }
 
@@ -325,7 +336,7 @@ public final class SQLBeanBuilder {
      * @return {@link String}
      * @throws SQLTableNotFoundException
      */
-    public String insertAllWithoutPk() throws SQLTableNotFoundException {
+    public String insertAllWithoutPk() {
         return insertRoutersPk(false);
     }
 
@@ -336,7 +347,7 @@ public final class SQLBeanBuilder {
      * @return {@link String}
      * @throws SQLTableNotFoundException
      */
-    public String insertRoutersWithPk(int... routers) throws SQLTableNotFoundException {
+    public String insertRoutersWithPk(int... routers) {
         return insertRoutersPk(true, routers);
     }
 
@@ -347,7 +358,7 @@ public final class SQLBeanBuilder {
      * @return {@link String}
      * @throws SQLTableNotFoundException
      */
-    public String insertRoutersWithoutPk(int... routers) throws SQLTableNotFoundException {
+    public String insertRoutersWithoutPk(int... routers) {
         return insertRoutersPk(false, routers);
     }
 
@@ -360,7 +371,7 @@ public final class SQLBeanBuilder {
      * @throws SQLTableNotFoundException
      * @throws UpdateColumnNullException
      */
-    public String updateRoutersByRouterArray(int[] updateRouters, int[] conditionRouters) throws SQLTableNotFoundException, UpdateColumnNullException {
+    public String updateRoutersByRouterArray(int[] updateRouters, int[] conditionRouters) {
         if (!SQLBuilderUtils.SQLTableIsExist(beanClass))
             throw new SQLTableNotFoundException(beanClass);
         else {
@@ -397,7 +408,7 @@ public final class SQLBeanBuilder {
      * @throws SQLTableNotFoundException
      * @throws UpdateColumnNullException
      */
-    public String updateRoutersByRouters(int[] updateRouters, int... conditionRouters) throws SQLTableNotFoundException, UpdateColumnNullException {
+    public String updateRoutersByRouters(int[] updateRouters, int... conditionRouters) {
         return updateRoutersByRouterArray(updateRouters, conditionRouters);
     }
 
@@ -410,7 +421,7 @@ public final class SQLBeanBuilder {
      * @throws UpdateColumnNullException
      * @throws UpdatePkNotExistException
      */
-    public String updateRoutersByPk(int... updateRouters) throws SQLTableNotFoundException, UpdateColumnNullException, UpdatePkNotExistException {
+    public String updateRoutersByPk(int... updateRouters) {
         if (!SQLBuilderUtils.SQLTableIsExist(beanClass))
             throw new SQLTableNotFoundException(beanClass);
         else {
@@ -447,7 +458,7 @@ public final class SQLBeanBuilder {
      * @throws SQLTableNotFoundException
      * @throws DeletePkNotExistException
      */
-    public String deleteByPk() throws SQLTableNotFoundException, DeletePkNotExistException {
+    public String deleteByPk() {
         if (!SQLBuilderUtils.SQLTableIsExist(beanClass))
             throw new SQLTableNotFoundException(beanClass);
         else {
@@ -478,7 +489,7 @@ public final class SQLBeanBuilder {
      * @throws SQLTableNotFoundException
      * @throws DeleteSQLConditionsNullException
      */
-    public String deleteByRouters(int... routers) throws SQLTableNotFoundException, DeleteSQLConditionsNullException {
+    public String deleteByRouters(int... routers) {
         if (!SQLBuilderUtils.SQLTableIsExist(beanClass))
             throw new SQLTableNotFoundException(beanClass);
         else {
