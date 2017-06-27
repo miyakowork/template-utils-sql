@@ -1,11 +1,12 @@
-package me.wuwenbin.sql.factory;
+package org.templateproject.sql.factory;
 
 
-import me.wuwenbin.sql.annotation.SQLColumn;
-import me.wuwenbin.sql.annotation.SQLTable;
+import org.templateproject.sql.annotation.SQLColumn;
+import org.templateproject.sql.annotation.SQLTable;
 import me.wuwenbin.sql.exception.*;
-import me.wuwenbin.sql.util.SQLBuilderUtils;
-import me.wuwenbin.sql.util.SQLDefineUtils;
+import org.templateproject.sql.exception.*;
+import org.templateproject.sql.util.SQLBuilderUtils;
+import org.templateproject.sql.util.SQLDefineUtils;
 
 import java.lang.reflect.Field;
 

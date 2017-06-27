@@ -1,7 +1,7 @@
-package me.wuwenbin.sql.util;
+package org.templateproject.sql.util;
 
 
-import me.wuwenbin.sql.annotation.SQLTable;
+import org.templateproject.sql.annotation.SQLTable;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;

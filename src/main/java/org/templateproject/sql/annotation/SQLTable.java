@@ -1,4 +1,4 @@
-package me.wuwenbin.sql.annotation;
+package org.templateproject.sql.annotation;
 
 import java.lang.annotation.*;
 

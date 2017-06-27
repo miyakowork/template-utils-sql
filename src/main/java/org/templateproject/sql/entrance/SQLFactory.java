@@ -1,8 +1,8 @@
-package me.wuwenbin.sql.entrance;
+package org.templateproject.sql.entrance;
 
 
-import me.wuwenbin.sql.factory.SQLBeanBuilder;
-import me.wuwenbin.sql.factory.SQLStrBuilder;
+import org.templateproject.sql.factory.SQLBeanBuilder;
+import org.templateproject.sql.factory.SQLStrBuilder;
 
 /**
  * 使用入口方法

@@ -1,4 +1,4 @@
-package me.wuwenbin.sql.exception;
+package org.templateproject.sql.exception;
 
 /**
  * 字面意思

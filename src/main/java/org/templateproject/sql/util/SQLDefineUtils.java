@@ -1,4 +1,4 @@
-package me.wuwenbin.sql.util;
+package org.templateproject.sql.util;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

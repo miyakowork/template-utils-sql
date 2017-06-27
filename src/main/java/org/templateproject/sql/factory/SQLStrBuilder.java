@@ -1,11 +1,11 @@
-package me.wuwenbin.sql.factory;
+package org.templateproject.sql.factory;
 
 
-import me.wuwenbin.sql.exception.DeleteSQLConditionsNullException;
-import me.wuwenbin.sql.exception.InsertColumnNullException;
-import me.wuwenbin.sql.exception.TableNameNullException;
-import me.wuwenbin.sql.exception.UpdateColumnNullException;
-import me.wuwenbin.sql.util.SQLBuilderUtils;
+import org.templateproject.sql.exception.DeleteSQLConditionsNullException;
+import org.templateproject.sql.exception.InsertColumnNullException;
+import org.templateproject.sql.exception.TableNameNullException;
+import org.templateproject.sql.exception.UpdateColumnNullException;
+import org.templateproject.sql.util.SQLBuilderUtils;
 
 /**
  * 不根据实体类,根据一些参数生成一些常见SQL

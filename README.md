@@ -2,6 +2,9 @@
 template-projects中的内置简单sql生成工具
 
 ## 更新日志 ## 
+#### 2.0.0.RELEASE
++ 此版本开始不与1.x.x.RELEASE版本兼容
++ 更改package为org.templateproject
 #### 1.4.0.RELEASE
 + 所有的异常改为RuntimeException级别
 + 调整某些方法通用名字，以前的则注释为过期方法

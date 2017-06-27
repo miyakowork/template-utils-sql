@@ -1,4 +1,4 @@
-package me.wuwenbin.sql.exception;
+package org.templateproject.sql.exception;
 
 /**
  * 未识别的主键，不存在或没标识注解
