@@ -3,7 +3,6 @@ package org.templateproject.sql.factory;
 
 import org.templateproject.sql.annotation.SQLColumn;
 import org.templateproject.sql.annotation.SQLTable;
-import me.wuwenbin.sql.exception.*;
 import org.templateproject.sql.exception.*;
 import org.templateproject.sql.util.SQLBuilderUtils;
 import org.templateproject.sql.util.SQLDefineUtils;
@@ -49,7 +48,7 @@ public final class SQLBeanBuilder {
      * 获取当前SQLTable中的表名
      *
      * @return 表名
-     * @throws SQLTableNotFoundException
+     * @throws SQLTableNotFoundException SQLTableNotFoundException
      */
     public String getTableName() {
         if (!SQLBuilderUtils.SQLTableIsExist(beanClass))
@@ -61,8 +60,8 @@ public final class SQLBeanBuilder {
     /**
      * 获取主键变量
      *
-     * @return
-     * @throws PkFieldNotFoundException
+     * @return 字段名
+     * @throws PkFieldNotFoundException PkFieldNotFoundException
      */
     public Field getPkField() {
         Field[] fields = SQLBuilderUtils.getAllFieldsExceptObject(beanClass);
@@ -83,7 +82,7 @@ public final class SQLBeanBuilder {
     /**
      * 获取所有的成员变量，包括所有父类，除了Object
      *
-     * @return
+     * @return 字段名数组
      */
     public Field[] getAllFieldExceptObject() {
         return SQLBuilderUtils.getAllFieldsExceptObject(beanClass);
@@ -100,7 +99,7 @@ public final class SQLBeanBuilder {
         else {
             String tableName = beanClass.getAnnotation(sqlTableClass).value();
             StringBuilder sb = new StringBuilder(selectPre);
-            sb.append("COUNT(*)").append(FROM).append(tableName).toString();
+            sb.append("COUNT(*)").append(FROM).append(tableName);
             return SQLBuilderUtils.dealSQL(sb.toString());
         }
     }
@@ -110,7 +109,7 @@ public final class SQLBeanBuilder {
      *
      * @param routers 需要and哪些字段来统计记录数
      * @return {@link String}
-     * @throws SQLTableNotFoundException
+     * @throws SQLTableNotFoundException SQLTableNotFoundException
      */
     public String countAndByRouters(int... routers) {
         if (!SQLBuilderUtils.SQLTableIsExist(beanClass))
@@ -134,7 +133,7 @@ public final class SQLBeanBuilder {
      *
      * @param routers 需要or哪些字段来统计记录数
      * @return {@link String}
-     * @throws SQLTableNotFoundException
+     * @throws SQLTableNotFoundException SQLTableNotFoundException
      */
     public String countOrByRouters(int... routers) {
         if (!SQLBuilderUtils.SQLTableIsExist(beanClass))
@@ -159,7 +158,7 @@ public final class SQLBeanBuilder {
      * @param selectColumnsRouters 需要查询的router
      * @param conditionRouters     and条件中的router
      * @return {@link String}
-     * @throws SQLTableNotFoundException
+     * @throws SQLTableNotFoundException SQLTableNotFoundException
      */
     public String selectPartByRoutersAnd(int[] selectColumnsRouters, int... conditionRouters) {
         if (!SQLBuilderUtils.SQLTableIsExist(beanClass))

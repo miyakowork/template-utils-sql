@@ -2,6 +2,8 @@
 template-projects中的内置简单sql生成工具
 
 ## 更新日志 ## 
+#### 2.0.1.RELEASE
++ 优化代码方法
 #### 2.0.0.RELEASE
 + 此版本开始不与1.x.x.RELEASE版本兼容
 + 更改package为org.templateproject
